@@ -1,0 +1,261 @@
+options:
+  parameters:
+    author: Mic - YD3BRB
+    catch_exceptions: 'True'
+    category: '[GRC Hier Blocks]'
+    cmake_opt: ''
+    comment: ''
+    copyright: "Copyleft \U0001F12F"
+    description: ''
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: HackRF_Tx
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u {filename}'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: HackRF_Tx
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 16.0]
+    rotation: 0
+    state: enabled
+
+blocks:
+- name: audio_samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: int(4.8e4)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [200, 12.0]
+    rotation: 0
+    state: enabled
+- name: quadrature_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: int(48e3)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [328, 12.0]
+    rotation: 0
+    state: enabled
+- name: samp_rate
+  id: variable
+  parameters:
+    comment: ''
+    value: int(2e6)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [448, 12.0]
+    rotation: 0
+    state: enabled
+- name: tune_freq
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '300'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: 144e6
+    step: 50e3
+    stop: 149e6
+    value: 145.6e6
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [584, 12.0]
+    rotation: 0
+    state: true
+- name: vga_gain
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '2'
+    stop: '49'
+    value: '32'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [728, 12.0]
+    rotation: 0
+    state: true
+- name: analog_nbfm_tx_0
+  id: analog_nbfm_tx
+  parameters:
+    affinity: ''
+    alias: ''
+    audio_rate: audio_samp_rate
+    comment: ''
+    fh: '-1.0'
+    max_dev: 5e3
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    quad_rate: quadrature_rate
+    tau: 75e-6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [232, 180.0]
+    rotation: 0
+    state: true
+- name: audio_source_0
+  id: audio_source
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    device_name: soundblaster
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_outputs: '1'
+    ok_to_block: 'True'
+    samp_rate: '48000'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [24, 172.0]
+    rotation: 0
+    state: true
+- name: qtgui_waterfall_sink_x_0
+  id: qtgui_waterfall_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    axislabels: 'True'
+    bw: samp_rate/4
+    color1: '0'
+    color10: '0'
+    color2: '0'
+    color3: '0'
+    color4: '0'
+    color5: '0'
+    color6: '0'
+    color7: '0'
+    color8: '0'
+    color9: '0'
+    comment: ''
+    fc: '0'
+    fftsize: '1024'
+    freqhalf: 'True'
+    grid: 'False'
+    gui_hint: ''
+    int_max: '10'
+    int_min: '-140'
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    nconnections: '1'
+    showports: 'False'
+    type: complex
+    update_time: '0.10'
+    wintype: window.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [536, 308.0]
+    rotation: 0
+    state: true
+- name: rational_resampler_xxx_0_0
+  id: rational_resampler_xxx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    decim: quadrature_rate
+    fbw: '0'
+    interp: samp_rate
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    taps: '[]'
+    type: ccc
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [488, 132.0]
+    rotation: 0
+    state: true
+- name: soapy_hackrf_sink_0
+  id: soapy_hackrf_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: 'False'
+    bandwidth: '0'
+    center_freq: tune_freq
+    comment: ''
+    dev_args: ''
+    samp_rate: samp_rate
+    type: fc32
+    vga: vga_gain
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [816, 160.0]
+    rotation: 0
+    state: true
+
+connections:
+- [analog_nbfm_tx_0, '0', qtgui_waterfall_sink_x_0, '0']
+- [analog_nbfm_tx_0, '0', rational_resampler_xxx_0_0, '0']
+- [audio_source_0, '0', analog_nbfm_tx_0, '0']
+- [rational_resampler_xxx_0_0, '0', soapy_hackrf_sink_0, '0']
+
+metadata:
+  file_format: 1
